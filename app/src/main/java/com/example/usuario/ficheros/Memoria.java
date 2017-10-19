@@ -1,6 +1,7 @@
 package com.example.usuario.ficheros;
 
 import android.content.Context;
+import android.os.Environment;
 import android.util.Log;
 
 import java.io.BufferedWriter;
@@ -77,5 +78,41 @@ public class Memoria {
         File miFichero;
         miFichero = new File(contexto.getFilesDir(), fichero);
         return mostrarPropiedades(miFichero);
+    }
+
+    public boolean disponibleEscritura(){
+        boolean escritura = false;
+//Comprobamos el estado de la memoria externa (tarjeta SD)
+        String estado = Environment.getExternalStorageState();
+        if (estado.equals(Environment.MEDIA_MOUNTED))
+            escritura = true;
+        return escritura;
+    }
+    public boolean disponibleLectura(){
+        boolean lectura = false;
+//Comprobamos el estado de la memoria externa (tarjeta SD)
+        String estado = Environment.getExternalStorageState();
+        if (estado.equals(Environment.MEDIA_MOUNTED_READ_ONLY)
+                || estado.equals(Environment.MEDIA_MOUNTED))
+            lectura = true;
+        return lectura;
+    }
+
+    public boolean escribirExterna(String fichero, String cadena, Boolean anadir, String codigo) {
+        File miFichero, tarjeta;
+        tarjeta = Environment.getExternalStorageDirectory();
+
+        miFichero = new File(tarjeta.getAbsolutePath(), fichero);
+        return escribir(miFichero, cadena, anadir, codigo);
+    }
+
+    public String mostrarPropiedadesExterno(String fichero){
+        File miFichero,targeta;
+
+        targeta =Environment.getExternalStorageDirectory();
+        miFichero=new File(targeta.getAbsolutePath(),fichero);
+
+        return mostrarPropiedades(miFichero);
+
     }
 }

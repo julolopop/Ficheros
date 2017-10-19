@@ -38,5 +38,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent Eje1 = new Intent(MainActivity.this, EscribirInternaActivity.class);
             startActivity(Eje1);
         }
+        if (view == this.Eje2) {
+            Intent Eje1 = new Intent(MainActivity.this, EscribirExternaActivity.class);
+            startActivity(Eje1);
+        }
     }
 }
