@@ -34,13 +34,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        if (view == this.Eje1) {
-            Intent Eje1 = new Intent(MainActivity.this, EscribirInternaActivity.class);
-            startActivity(Eje1);
-        }
-        if (view == this.Eje2) {
-            Intent Eje1 = new Intent(MainActivity.this, EscribirExternaActivity.class);
-            startActivity(Eje1);
+
+        Intent Ejercicio;
+
+        switch (view.getId()) {
+            case R.id.Eje1:
+                Ejercicio = new Intent(MainActivity.this, EscribirInternaActivity.class);
+                startActivity(Ejercicio);
+                break;
+            case R.id.Eje2:
+                Ejercicio = new Intent(MainActivity.this, EscribirExternaActivity.class);
+                startActivity(Ejercicio);
+                break;
+            case R.id.Eje3:
+                Ejercicio = new Intent(MainActivity.this, LeerMemoriaActivity.class);
+                startActivity(Ejercicio);
+                break;
         }
     }
 }

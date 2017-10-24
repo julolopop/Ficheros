@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.usuario.ficheros.LeerMemoriaActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="/res/raw/numero.txt" />
+
+    <EditText
+        android:id="@+id/edt_operando1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="2"
+        android:inputType="numberDecimal"
+        android:text="" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="/assets/valor.txt" />
+
+    <EditText
+        android:id="@+id/edt_operando2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="2"
+        android:inputType="numberDecimal"
+        android:text="" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="dato.txt en Memoria interna" />
+
+    <EditText
+        android:id="@+id/edt_operando3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="2"
+        android:inputType="numberDecimal"
+        android:text="" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="dato.txt en Memoria externa" />
+
+    <EditText
+        android:id="@+id/edt_operando4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="2"
+        android:inputType="numberDecimal"
+        android:text="" />
+
+    <Button
+        android:id="@+id/btn_suma"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:text="+" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Resultado (Añadido a operaciones.txt)" />
+    <TextView
+        android:id="@+id/txv_resultado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
