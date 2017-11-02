@@ -104,7 +104,7 @@ public class LeerMemoriaActivity extends AppCompatActivity implements View.OnCli
             }
             txv_resultado.setText(operacion);
 
-           miMemoria.escribirInterna(this.OPERACIONES, operacion, false, this.CODIFICACION);
+           miMemoria.escribirExterna(this.OPERACIONES, operacion, false, this.CODIFICACION);
 
 
         }

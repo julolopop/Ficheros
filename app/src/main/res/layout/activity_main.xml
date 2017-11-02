@@ -47,4 +47,16 @@
         app:layout_constraintTop_toBottomOf="@+id/Eje3"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/Eje5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="32dp"
+        android:text="Explorador"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Eje4" />
 </android.support.constraint.ConstraintLayout>
