@@ -33,7 +33,8 @@ public class ExploracionActivity extends AppCompatActivity implements View.OnCli
             case R.id.btn_Abrir:
 
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("file/*");
+                intent.setType("*/*");
+
                 if (intent.resolveActivity(getPackageManager()) != null)
                     startActivityForResult(intent, ABRIRFICHERO_REQUEST_CODE);
                 else
@@ -52,6 +53,10 @@ public class ExploracionActivity extends AppCompatActivity implements View.OnCli
             if (resultCode == RESULT_OK) {
                 // Mostramos en la etiqueta la ruta del archivo seleccionado
                 String ruta = data.getData().getPath();
+                int index = ruta.indexOf(':')+1;
+
+
+                ruta = ruta.substring(index);
                 txv_Info.setText(ruta);
             } else
                 Toast.makeText(this, "Error: " + resultCode, Toast.LENGTH_SHORT).show();

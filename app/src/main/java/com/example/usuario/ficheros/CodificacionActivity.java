@@ -19,7 +19,7 @@ public class CodificacionActivity extends AppCompatActivity implements View.OnCl
     Button leer, guardar;
     RadioButton rdb_Utf8, rdb_Utf16, rdb_Iso;
     Memoria miMemoria;
-
+    private static final int ABRIRFICHERO_REQUEST_CODE = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,12 +46,11 @@ public class CodificacionActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View v) {
-        String cadena1 = ficheroLectura.getText().toString();
-        String cadena2 = contenido.getText().toString();
+
         String cadena3 = ficheroEscritura.getText().toString();
         String mensaje = "";
         String codificacion = "UTF-8";
-        Resultado resultado;
+
 
 
         if (rdb_Utf8.isChecked())
@@ -70,20 +69,23 @@ public class CodificacionActivity extends AppCompatActivity implements View.OnCl
                 } else
                     mensaje = "Error al leer el fichero " + cadena1 + " " + resultado.getMensaje();*/
 //https://github.com/nbsp-team/MaterialFilePicker
-                Intent intent = new Intent(this, FilePickerActivity.class);
-                intent.putExtra(FilePickerActivity.ARG_FILE_FILTER, Pattern.compile(".*\\.txt$"));
-                intent.putExtra(FilePickerActivity.ARG_DIRECTORIES_FILTER, true);
-                intent.putExtra(FilePickerActivity.ARG_SHOW_HIDDEN, true);
-                startActivityForResult(intent, 1);
 
-                Toast.makeText(this,filePicker.toString(),Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("*/*");
+
+                if (intent.resolveActivity(getPackageManager()) != null)
+                    startActivityForResult(intent, ABRIRFICHERO_REQUEST_CODE);
+                else
+                    //informar que no hay ninguna aplicación para manejar ficheros
+                    Toast.makeText(this, "No hay aplicación para manejar ficheros", Toast.LENGTH_SHORT).show();
+
 
                 break;
             case R.id.btn_guardar:
                 if (cadena3.isEmpty())
                     mensaje = "Debe introducir un nombre al fichero";
                 else if (miMemoria.disponibleEscritura())
-                    if (miMemoria.escribirExterna(cadena3, cadena2, false, codificacion))
+                    if (miMemoria.escribirExterna(cadena3,  contenido.getText().toString(), false, codificacion))
                         mensaje = "Fichero escrito correctamente";
                     else
                         mensaje = "error al escribir en el fichero";
@@ -94,5 +96,40 @@ public class CodificacionActivity extends AppCompatActivity implements View.OnCl
         Toast.makeText(CodificacionActivity.this, mensaje, Toast.LENGTH_SHORT).show();
 
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+        Resultado resultado;
+        String mensaje = "";
+        String codificacion = "UTF-8";
+
+
+
+        if (rdb_Utf8.isChecked())
+            codificacion = "UTF-8";
+        else if (rdb_Utf16.isChecked())
+            codificacion = "UTF-16";
+        else if (rdb_Iso.isChecked())
+            codificacion = "ISO-8859-15";
+
+
+        if (requestCode == ABRIRFICHERO_REQUEST_CODE)
+            if (resultCode == RESULT_OK) {
+                // Mostramos en la etiqueta la ruta del archivo seleccionado
+                String ruta = data.getData().getPath();
+                int index = ruta.indexOf(':')+1;
+
+
+                ruta = ruta.substring(index);
+                ficheroLectura.setText(ruta);
+            } else
+                Toast.makeText(this, "Error: " + resultCode, Toast.LENGTH_SHORT).show();
+
+        resultado = miMemoria.leerExterna( ficheroLectura.getText().toString(), codificacion);
+        if (resultado.getCodigo()) {
+            contenido.setText(resultado.getContenido());
+            mensaje = "Fichero leido correctamente";
+        } else
+            mensaje = "Error al leer el fichero " +  ficheroLectura.getText().toString() + " " + resultado.getMensaje();
+    }
 }

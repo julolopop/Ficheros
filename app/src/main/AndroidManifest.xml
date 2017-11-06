@@ -24,7 +24,6 @@
         <activity android:name=".CodificacionActivity" />
         <activity android:name=".ExploracionActivity" />
         <activity android:name=".FilePickectActivity" />
-        <activity android:name=".FilePickerActivity"></activity>
     </application>
 
 </manifest>
