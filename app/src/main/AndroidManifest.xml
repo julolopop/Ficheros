@@ -23,7 +23,6 @@
         <activity android:name=".LeerMemoriaActivity" />
         <activity android:name=".CodificacionActivity" />
         <activity android:name=".ExploracionActivity" />
-        <activity android:name=".FilePickectActivity" />
     </application>
 
 </manifest>
